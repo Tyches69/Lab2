@@ -1,0 +1,63 @@
+﻿#include <iostream>
+using namespace std;
+char c;
+int score, visits, ms, mv, w;
+int main() {
+	setlocale(LC_ALL, ""); 
+
+	cout << "Введите тип контроля (E — экзамен, T — тест, P — проект):\n";
+	cin >> c;
+
+	switch (c) {
+
+	case 'e':
+	case 'E': {
+		ms = 50;
+		mv = 75;
+		break;
+	}
+
+	case 't':
+	case 'T': {
+		ms = 60;
+		mv = 60;
+		break;
+	}
+
+	case 'p':
+	case 'P': {
+		ms = 60;
+		mv = 0;
+		break;
+	}
+
+	default: {
+		cout << "Введён не верный тип контроля";
+		return 1;
+	}
+	}
+
+	cout << "Введите посещаемость:\n";
+	cin >> visits;
+
+	cout << "Введите балл:\n";
+	cin >> score;
+
+	cout << "выполнена ли обязательна работа(1/ 0)\n";
+	cin >> w;
+
+	if (score < 0 || score > 100 || visits < 0 || visits > 100 || w != 1 && w != 0) {
+		cout << "Ошибка: некоректное значение!";
+		return 1;
+	}
+
+	if (score < ms)  cout << "Отказ. Причина: Балл (" << score << ") ниже минимального для формы '" << c << "' (" << ms << ").";
+
+	else if (visits < mv)  cout << "Отказ. Причина: Посещаемость (" << visits << ") ниже минимального для формы '" << c << "' (" << mv << ").";
+
+	else if (w == 0) cout << "Отказ. Причина: Обязательная работа не выполнена";
+
+	else cout << "Успешно пройдено! Все условия для формы '" << c << "' выполнены.";
+
+return 0;
+}
